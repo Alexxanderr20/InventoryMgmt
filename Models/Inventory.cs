@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 
 namespace InventoryMgmt.Models { 
     public static class Inventory
     {
-        public static List<Part> AllParts { get; set; } = new List<Part>();
-        public static List<Product> Products { get; set; } = new List<Product>();
+        public static BindingList<Part> AllParts { get; } = new BindingList<Part>();
+        public static BindingList<Product> Products { get; } = new BindingList<Product>();
 
         //Product methods
         public static void AddProduct(Product product)
@@ -14,7 +16,7 @@ namespace InventoryMgmt.Models {
 
         public static bool RemoveProduct(int productID)
         {
-            var product = Products.Find(p => p.ProductID == productID);
+            var product = Products.FirstOrDefault(p => p.ProductID == productID);
             if (product != null)
             {
                 Products.Remove(product);
@@ -25,7 +27,7 @@ namespace InventoryMgmt.Models {
 
         public static Product LookupProduct(int productID)
         {
-            return Products.Find(p => p.ProductID == productID);
+            return Products.FirstOrDefault(p => p.ProductID == productID);
         }
 
         public static List<Product> GetAllProducts()
@@ -46,7 +48,7 @@ namespace InventoryMgmt.Models {
 
         public static Part LookupPart(int partID)
         {
-            return AllParts.Find(p => p.PartID == partID);
+            return AllParts.FirstOrDefault(p => p.PartID == partID);
         }
         public static List<Part> GetAllParts()
         {
