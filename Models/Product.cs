@@ -6,12 +6,12 @@ namespace InventoryMgmt.Models
     {
         public int ProductID { get; set; }
         public string Name { get; set; }
-        public double Price { get; set; }
+        public decimal Price { get; set; }
         public int InStock { get; set; }
         public int Min { get; set; }
         public int Max { get; set; }
         public List<Part> AssociatedParts { get; set; }
-        public Product(int productID, string name, double price, int inStock, int min, int max)
+        public Product(int productID, string name, decimal price, int inStock, int min, int max)
         {
             ProductID = productID;
             Name = name;

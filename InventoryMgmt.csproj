@@ -53,6 +53,10 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\AddPartForm.cs" />
+    <Compile Include="Forms\AddProductForm.cs" />
+    <Compile Include="Forms\ModifyPartForm.cs" />
+    <Compile Include="Forms\ModifyProductForm.cs" />
     <Compile Include="Models\Inhouse.cs" />
     <Compile Include="Models\Inventory.cs" />
     <Compile Include="Models\Outsourced.cs" />
