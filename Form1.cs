@@ -8,6 +8,19 @@ namespace InventoryMgmt
         public Form1()
         {
             InitializeComponent();
+
+            dgvParts.DataSource = Models.Inventory.AllParts;
+            dgvProducts.DataSource = Models.Inventory.Products;
+
+            dgvParts.Columns["PartID"].HeaderText = "Part ID";
+            dgvParts.Columns["Name"].HeaderText = "Part Name";
+            dgvParts.Columns["Price"].HeaderText = "Price";
+            dgvParts.Columns["InStock"].HeaderText = "Inventory";
+
+            dgvProducts.Columns["ProductID"].HeaderText = "Product ID";
+            dgvProducts.Columns["Name"].HeaderText = "Product Name";
+            dgvProducts.Columns["Price"].HeaderText = "Price";
+            dgvProducts.Columns["InStock"].HeaderText = "Inventory";
         }
 
         private void btnExit_Click(object sender, EventArgs e)
