@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InventoryMgmt.Forms;
+using System;
 using System.Windows.Forms;
 
 namespace InventoryMgmt
@@ -30,7 +31,8 @@ namespace InventoryMgmt
 
         private void btnAddPart_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Add Part clicked (placeholder)");
+            AddPartForm addForm = new AddPartForm();
+            addForm.ShowDialog();
         }
 
         private void btnModifyPart_Click(Object sender, EventArgs e)
