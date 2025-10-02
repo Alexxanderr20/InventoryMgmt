@@ -26,7 +26,7 @@ namespace InventoryMgmt.Forms
             {
                 int partID = int.Parse(txtPartID.Text);
                 string name = txtPartName.Text;
-                decimal price = decimal.Parse(txtInStock.Text);
+                decimal price = decimal.Parse(txtPrice.Text);
                 int stock = int.Parse(txtInStock.Text);
                 int min = int.Parse(txtMin.Text);
                 int max = int.Parse(txtMax.Text);

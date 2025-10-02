@@ -1,6 +1,10 @@
-﻿namespace InventoryMgmt.Forms
+﻿using System;
+using InventoryMgmt.Forms;
+using InventoryMgmt.Models;
+
+namespace InventoryMgmt.Forms
 {
-    partial class AddPartForm
+    partial class ModifyPartForm
     {
         /// <summary>
         /// Required designer variable.
@@ -45,8 +49,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.lblMachineCompany = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // rbtnInhouse
@@ -197,33 +201,33 @@
             this.lblMachineCompany.TabIndex = 16;
             this.lblMachineCompany.Text = "Machine ID";
             // 
-            // button1
+            // Save Button
             // 
-            this.button1.Location = new System.Drawing.Point(456, 390);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "Save";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnSave.Location = new System.Drawing.Point(456, 390);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 17;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // button2
+            // Cancel button
             // 
-            this.button2.Location = new System.Drawing.Point(567, 389);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 18;
-            this.button2.Text = "Cancel";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.btnCancel_Click);
+            this.btnCancel.Location = new System.Drawing.Point(567, 389);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 18;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // AddPartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.lblMachineCompany);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -241,12 +245,11 @@
             this.Controls.Add(this.txtPartID);
             this.Controls.Add(this.rbtnOutsourced);
             this.Controls.Add(this.rbtnInhouse);
-            this.Name = "AddPartForm";
-            this.Text = "AddPartForm";
-            this.Load += new System.EventHandler(this.AddPartForm_Load);
+            this.Name = "ModifyPartForm";
+            this.Text = "ModifyPartForm";
+            this.Load += new System.EventHandler(this.ModifyPartForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
@@ -268,7 +271,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label lblMachineCompany;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnCancel;
     }
 }

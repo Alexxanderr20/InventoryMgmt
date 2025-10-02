@@ -1,4 +1,5 @@
 ﻿using InventoryMgmt.Forms;
+using InventoryMgmt.Models;
 using System;
 using System.Windows.Forms;
 
@@ -37,7 +38,12 @@ namespace InventoryMgmt
 
         private void btnModifyPart_Click(Object sender, EventArgs e)
         {
-            MessageBox.Show("Modify Part clicked (placeholder)");
+            if (dgvParts.CurrentRow != null)
+            {
+               Part selectedPart = (Part)dgvParts.CurrentRow.DataBoundItem;
+               ModifyPartForm modifyForm = new ModifyPartForm(selectedPart);
+               modifyForm.ShowDialog();
+            }
         }
 
         private void btnDeletePart_Click(Object sender, EventArgs e)
