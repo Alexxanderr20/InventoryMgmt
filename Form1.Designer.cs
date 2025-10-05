@@ -36,57 +36,99 @@
             this.btnModifyProduct = new System.Windows.Forms.Button();
             this.btnDeleteProduct = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
-            
             ((System.ComponentModel.ISupportInitialize)(this.dgvParts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
             this.SuspendLayout();
-
-            //Title
+            // 
+            // lblTitle
+            // 
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
             this.lblTitle.Location = new System.Drawing.Point(20, 20);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(294, 30);
+            this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Iventory Management App";
-
-            //Parts
+            // 
+            // dgvParts
+            // 
             this.dgvParts.Location = new System.Drawing.Point(20, 80);
+            this.dgvParts.Name = "dgvParts";
             this.dgvParts.Size = new System.Drawing.Size(500, 200);
-
-            //Products
+            this.dgvParts.TabIndex = 1;
+            // 
+            // dgvProducts
+            // 
             this.dgvProducts.Location = new System.Drawing.Point(540, 80);
+            this.dgvProducts.Name = "dgvProducts";
             this.dgvProducts.Size = new System.Drawing.Size(500, 20);
-
-            //Part Buttons
-            this.btnAddPart.Text = "Add";
+            this.dgvProducts.TabIndex = 2;
+            // 
+            // btnAddPart
+            // 
             this.btnAddPart.Location = new System.Drawing.Point(20, 300);
+            this.btnAddPart.Name = "btnAddPart";
+            this.btnAddPart.Size = new System.Drawing.Size(75, 23);
+            this.btnAddPart.TabIndex = 3;
+            this.btnAddPart.Text = "Add";
             this.btnAddPart.Click += new System.EventHandler(this.btnAddPart_Click);
-
+            // 
+            // btnModifyPart
+            // 
+            this.btnModifyPart.Location = new System.Drawing.Point(101, 300);
+            this.btnModifyPart.Name = "btnModifyPart";
+            this.btnModifyPart.Size = new System.Drawing.Size(75, 23);
+            this.btnModifyPart.TabIndex = 4;
             this.btnModifyPart.Text = "Modify";
-            this.btnModifyPart.Location = new System.Drawing.Point(100, 300);
             this.btnModifyPart.Click += new System.EventHandler(this.btnModifyPart_Click);
-
-            this.btnDeletePart.Text = "Delete";
+            // 
+            // btnDeletePart
+            // 
             this.btnDeletePart.Location = new System.Drawing.Point(180, 300);
+            this.btnDeletePart.Name = "btnDeletePart";
+            this.btnDeletePart.Size = new System.Drawing.Size(75, 23);
+            this.btnDeletePart.TabIndex = 5;
+            this.btnDeletePart.Text = "Delete";
             this.btnDeletePart.Click += new System.EventHandler(this.btnDeletePart_Click);
-
-            //Product Buttons
-            this.btnAddProduct.Text = "Add";
+            // 
+            // btnAddProduct
+            // 
             this.btnAddProduct.Location = new System.Drawing.Point(540, 300);
+            this.btnAddProduct.Name = "btnAddProduct";
+            this.btnAddProduct.Size = new System.Drawing.Size(75, 23);
+            this.btnAddProduct.TabIndex = 6;
+            this.btnAddProduct.Text = "Add";
             this.btnAddProduct.Click += new System.EventHandler(this.btnAddProduct_Click);
-
+            // 
+            // btnModifyProduct
+            // 
+            this.btnModifyProduct.Location = new System.Drawing.Point(634, 300);
+            this.btnModifyProduct.Name = "btnModifyProduct";
+            this.btnModifyProduct.Size = new System.Drawing.Size(75, 23);
+            this.btnModifyProduct.TabIndex = 7;
             this.btnModifyProduct.Text = "Modify";
-            this.btnModifyPart.Location = new System.Drawing.Point(620, 300);
-            this.btnModifyPart.Click += new System.EventHandler(this.btnModifyPart_Click);
-
+            this.btnModifyProduct.Click += new System.EventHandler(this.btnModifyProduct_Click);
+            // 
+            // btnDeleteProduct
+            // 
+            this.btnDeleteProduct.Location = new System.Drawing.Point(735, 300);
+            this.btnDeleteProduct.Name = "btnDeleteProduct";
+            this.btnDeleteProduct.Size = new System.Drawing.Size(75, 23);
+            this.btnDeleteProduct.TabIndex = 8;
             this.btnDeleteProduct.Text = "Delete";
-            this.btnDeleteProduct.Location = new System.Drawing.Point(700, 300);
             this.btnDeleteProduct.Click += new System.EventHandler(this.btnDeleteProduct_Click);
-
-            //Exit button
-            this.btnExit.Text = "Exit";
+            // 
+            // btnExit
+            // 
             this.btnExit.Location = new System.Drawing.Point(940, 340);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(75, 23);
+            this.btnExit.TabIndex = 9;
+            this.btnExit.Text = "Exit";
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-
-            //Form 1
+            // 
+            // Form1
+            // 
             this.ClientSize = new System.Drawing.Size(1080, 400);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.dgvParts);
@@ -98,12 +140,14 @@
             this.Controls.Add(this.btnModifyProduct);
             this.Controls.Add(this.btnDeleteProduct);
             this.Controls.Add(this.btnExit);
+            this.Name = "Form1";
             this.Text = "Inventory Management System";
-
+            this.Click += new System.EventHandler(this.btnDeleteProduct_Click);
             ((System.ComponentModel.ISupportInitialize)(this.dgvParts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
     }
 }

@@ -48,21 +48,62 @@ namespace InventoryMgmt
 
         private void btnDeletePart_Click(Object sender, EventArgs e)
         {
-            MessageBox.Show("Delete Part clicked (placeholder)");
+            if (dgvParts.CurrentRow != null)
+            {
+                Part selectedPart = (Part)dgvParts.CurrentRow.DataBoundItem;
+
+                var confirm = MessageBox.Show($"Are you sure want to delete part '{selectedPart.Name}'?", "Confirm Delete", MessageBoxButtons.YesNo);
+                if (confirm == DialogResult.Yes)
+                {
+                    Models.Inventory.DeletePart(selectedPart);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a part to delete.");
+            }
         }
+
+
+
         private void btnAddProduct_Click(Object sender, EventArgs e)
         {
-            MessageBox.Show("Add Product clicked (placeholder)");
+            AddProductForm addProductForm = new AddProductForm();
+            addProductForm.ShowDialog();
         }
 
         private void btnModifyProduct_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Modify Product clicked (placeholder)");
+            //
         }
 
         private void btnDeleteProduct_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Delete Product clicked (placeholder) ");
+            if (dgvParts.CurrentRow != null)
+            {
+                Product selectedProduct = (Product)dgvParts.CurrentRow.DataBoundItem;
+
+                if (selectedProduct.AssociatedParts.Count > 0)
+                {
+                    MessageBox.Show("Can't delete a product that has associated parts");
+                    return;
+                }
+
+                var confirm = MessageBox.Show($"Are you sure you want to delete {selectedProduct.Name}?",
+                    "Confirm Delete",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+
+                if (confirm == DialogResult.Yes)
+                {
+                    Inventory.RemoveProduct(selectedProduct.ProductID);
+                }
+            }
+
+            else 
+            {
+                MessageBox.Show("Please select a product to delete.");
+            }
         }
     }
 }

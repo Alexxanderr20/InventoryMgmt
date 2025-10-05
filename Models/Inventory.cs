@@ -8,6 +8,24 @@ namespace InventoryMgmt.Models {
         public static BindingList<Part> AllParts { get; } = new BindingList<Part>();
         public static BindingList<Product> Products { get; } = new BindingList<Product>();
 
+        private static int nextProductID = 1;
+        private static int nextPartID = 1;
+
+        public static int GetNextProductID()
+        {
+            if (Products.Count == 0)
+            {
+                return 1000;
+            }
+            return Products.Max(p => p.ProductID) + 1;
+        }
+
+        public static int GetNextPartID()
+        {
+            return nextPartID++;
+        }
+
+
         //Product methods
         public static void AddProduct(Product product)
         {
@@ -54,5 +72,7 @@ namespace InventoryMgmt.Models {
         {
             return new List<Part>(AllParts);
         }
+
+
     }
 }
