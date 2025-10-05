@@ -74,7 +74,18 @@ namespace InventoryMgmt
 
         private void btnModifyProduct_Click(object sender, EventArgs e)
         {
-            //
+            if (dgvProducts.CurrentRow == null)
+            {
+                MessageBox.Show("Please select a product to modify.");
+                return;
+            }
+
+            Product selectedProduct = (Product)dgvProducts.CurrentRow.DataBoundItem;
+            ModifyProductForm modifyForm = new ModifyProductForm(selectedProduct);
+            modifyForm.ShowDialog();
+
+            dgvProducts.DataSource = null;
+            dgvProducts.DataSource = Inventory.Products;
         }
 
         private void btnDeleteProduct_Click(object sender, EventArgs e)

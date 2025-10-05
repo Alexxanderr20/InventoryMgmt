@@ -61,7 +61,7 @@
             // 
             this.dgvProducts.Location = new System.Drawing.Point(540, 80);
             this.dgvProducts.Name = "dgvProducts";
-            this.dgvProducts.Size = new System.Drawing.Size(500, 20);
+            this.dgvProducts.Size = new System.Drawing.Size(500, 200);
             this.dgvProducts.TabIndex = 2;
             // 
             // btnAddPart

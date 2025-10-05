@@ -13,6 +13,7 @@ namespace InventoryMgmt.Forms
 {
     public partial class ModifyProductForm : Form
     {
+        //private Part SelectedPart;
         private Product currentProduct;
         private BindingList<Part> associatedParts = new BindingList<Part>();
 
@@ -20,24 +21,21 @@ namespace InventoryMgmt.Forms
         {
             InitializeComponent();
             currentProduct = product;
+        }
 
-            // Populate fields with current product data
+        private void ModifyProductForm_Load(object sender, EventArgs e)
+        {
+            dgvAllParts.DataSource = Inventory.AllParts;
+
+            associatedParts = new BindingList<Part>(currentProduct.AssociatedParts.ToList());
+            dgvAssociatedParts.DataSource = associatedParts;
+
             txtID.Text = currentProduct.ProductID.ToString();
             txtName.Text = currentProduct.Name;
             txtInventory.Text = currentProduct.InStock.ToString();
             txtPrice.Text = currentProduct.Price.ToString();
             txtMin.Text = currentProduct.Min.ToString();
             txtMax.Text = currentProduct.Max.ToString();
-
-            // Set up associated parts list
-            foreach (var part in product.AssociatedParts)
-            {
-                associatedParts.Add(part);
-            }
-
-            // Bind DataGridViews
-            dgvAllParts.DataSource = Inventory.AllParts;
-            dgvAssociatedParts.DataSource = associatedParts;
         }
 
         //ADDS PART
@@ -52,13 +50,13 @@ namespace InventoryMgmt.Forms
 
             Part selectedPart = (Part)dgvAllParts.CurrentRow.DataBoundItem;
 
-            if (associatedParts.Any(p => p.PartID == selectedPart > PartID))
+            if (associatedParts.Any(p => p.PartID == selectedPart.PartID))
             {
-                MessageBox.Show("This part is already associatedwith this product.");
+                MessageBox.Show("This part is already associated with this product.");
                 return;
             }
 
-            associatedParts.Add(SelectedPart);
+            associatedParts.Add(selectedPart);
         }
 
         //Remove Part
@@ -76,7 +74,7 @@ namespace InventoryMgmt.Forms
             DialogResult result = MessageBox.Show(
                 $"Are you sure you want to remove {selectedPart.Name}?",
                 "Confirm Delete",
-                MessageBoxBUttons.YesNo);
+                MessageBoxButtons.YesNo);
 
             if (result == DialogResult.Yes)
             {
@@ -90,11 +88,11 @@ namespace InventoryMgmt.Forms
         {
             try 
             {
-                string name = txtName.Text.Trim();
-                int stock = int.Parse(txtInventory.Text);
-                decimal price = decimal.Parse(txtPrice.Text);
-                int min = int.Parse(txtMin.Text);
-                int max = int.Parse(txtMax.Text);
+                string name = label3.Text.Trim();
+                int stock = int.Parse(label4.Text);
+                decimal price = decimal.Parse(label5.Text);
+                int min = int.Parse(label6.Text);
+                int max = int.Parse(label7.Text);
 
                 if (min > max)
                 {
@@ -122,7 +120,7 @@ namespace InventoryMgmt.Forms
                 this.Close();
             }
 
-            catch {FormatException}
+            catch(FormatException)
             {
                 MessageBox.Show("Please enter valid values for all fields.");
             }
@@ -168,6 +166,21 @@ namespace InventoryMgmt.Forms
                 MessageBox.Show("No matching parts found.");
                 dgvAllParts.DataSource = Inventory.AllParts;
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void txtName_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
