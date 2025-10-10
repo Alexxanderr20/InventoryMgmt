@@ -41,7 +41,7 @@
             this.txtProductPrice = new System.Windows.Forms.TextBox();
             this.txtProductMax = new System.Windows.Forms.TextBox();
             this.txtProductMin = new System.Windows.Forms.TextBox();
-            this.btnProductSearch = new System.Windows.Forms.Button();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -163,14 +163,14 @@
             this.txtProductMin.Size = new System.Drawing.Size(100, 20);
             this.txtProductMin.TabIndex = 12;
             // 
-            // btnProductSearch
+            // btnSearch
             // 
-            this.btnProductSearch.Location = new System.Drawing.Point(466, 13);
-            this.btnProductSearch.Name = "btnProductSearch";
-            this.btnProductSearch.Size = new System.Drawing.Size(75, 23);
-            this.btnProductSearch.TabIndex = 13;
-            this.btnProductSearch.Text = "Search";
-            this.btnProductSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Location = new System.Drawing.Point(466, 13);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnSearch.TabIndex = 13;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
             // 
             // txtSearch
             // 
@@ -272,7 +272,7 @@
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.txtSearch);
-            this.Controls.Add(this.btnProductSearch);
+            this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.txtProductMin);
             this.Controls.Add(this.txtProductMax);
             this.Controls.Add(this.txtProductPrice);
@@ -310,7 +310,7 @@
         private System.Windows.Forms.TextBox txtProductPrice;
         private System.Windows.Forms.TextBox txtProductMax;
         private System.Windows.Forms.TextBox txtProductMin;
-        private System.Windows.Forms.Button btnProductSearch;
+        private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;

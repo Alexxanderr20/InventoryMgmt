@@ -2,6 +2,8 @@
 using InventoryMgmt.Models;
 using System;
 using System.Windows.Forms;
+using System.Linq;
+using System.ComponentModel;
 
 namespace InventoryMgmt
 {
@@ -56,6 +58,8 @@ namespace InventoryMgmt
                 if (confirm == DialogResult.Yes)
                 {
                     Models.Inventory.DeletePart(selectedPart);
+                    dgvParts.DataSource = null;
+                    dgvParts.DataSource = Inventory.AllParts;
                 }
             }
             else
@@ -84,8 +88,6 @@ namespace InventoryMgmt
             ModifyProductForm modifyForm = new ModifyProductForm(selectedProduct);
             modifyForm.ShowDialog();
 
-            dgvProducts.DataSource = null;
-            dgvProducts.DataSource = Inventory.Products;
         }
 
         private void btnDeleteProduct_Click(object sender, EventArgs e)
@@ -115,6 +117,112 @@ namespace InventoryMgmt
             {
                 MessageBox.Show("Please select a product to delete.");
             }
+        }
+
+        private void btnSearchParts_Click(Object sender, EventArgs e)
+        {
+            string query = txtPartsSearch.Text.Trim().ToLower();
+            bool found = false;
+
+            foreach (DataGridViewRow row in dgvParts.Rows)
+            {
+                Part part = row.DataBoundItem as Part;
+                if (part != null && (part.PartID.ToString().Contains(query) || part.Name.ToLower().Contains(query)))
+                {
+                    row.Selected = true;
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found)
+            {
+                MessageBox.Show("No matching part found.");
+            }
+        }
+
+
+        private void btnProductsSearch_Click(Object sender, EventArgs e)
+        {
+            string query = txtProductsSearch.Text.Trim().ToLower();
+            bool found = false;
+
+            foreach (DataGridViewRow row in dgvProducts.Rows)
+            {
+                Product product = row.DataBoundItem as Product;
+                if (product != null && (product.ProductID.ToString().Contains(query) || product.Name.ToLower().Contains(query)))
+                {
+                    row.Selected = true;
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found)
+            {
+                MessageBox.Show("No matching product found.");
+            }
+        }
+
+        //private void btnSearchParts_Click(object sender, EventArgs e)
+        //{
+        //    string query = txtSearchParts.Text.ToLower().Trim();
+
+        //    if (int.TryParse(query, out int id))
+        //    {
+        //        Part part = Inventory.LookupPart(id);
+
+        //        if (part != null)
+        //        {
+        //            dgvParts.DataSource = new BindingList<Part> { part };
+        //            return;
+        //        }
+        //    }
+
+
+        //    var results = Inventory.LookupPart(query);
+        //    if (results.Count > 0)
+        //    {
+        //        dgvParts.DataSource = new BindingList<Part>(results);
+        //    }
+        //    else 
+        //    {
+        //        MessageBox.Show("No matching parts found.");
+        //        dgvParts.DataSource = Inventory.AllParts;
+        //    }
+        //}
+
+
+
+        //private void btnSearchProducts_Click(object sender, EventArgs)
+        //{
+        //    string query = txtProductsSearch.Text.ToLower().Trim();
+
+        //    if (int.TryParse(query, out int id))
+        //    {
+        //        Product product = Inventory.LookupProduct(id);
+        //        if (product != null)
+        //        {
+        //            dgvProducts.DataSource = new BindingList<Product> { product };
+        //            return;
+        //        }
+        //    }
+
+        //    var results = Inventory.LookupProduct(query);
+        //    if (results.Count > 0)
+        //    {
+        //        dgvProducts.DataSource = new BindingList<Product>(results);
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("No matching products found.");
+        //        dgvProducts.DataSource = Inventory.Products;
+        //    }
+        //}
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

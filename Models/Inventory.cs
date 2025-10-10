@@ -34,13 +34,25 @@ namespace InventoryMgmt.Models {
 
         public static bool RemoveProduct(int productID)
         {
-            var product = Products.FirstOrDefault(p => p.ProductID == productID);
+            Product product = Products.FirstOrDefault(p => p.ProductID == productID);
             if (product != null)
             {
                 Products.Remove(product);
                 return true;
             }
             return false;
+        }
+
+        public static void UpdateProduct(int productID, Product newProduct)
+        {
+            for (int i = 0; i < Products.Count; i++)
+            {
+                if (Products[i].ProductID == productID)
+                {
+                    Products[i] = newProduct;
+                    return;
+                }
+            }
         }
 
         public static Product LookupProduct(int productID)

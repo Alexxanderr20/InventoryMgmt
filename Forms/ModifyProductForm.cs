@@ -1,93 +1,66 @@
 ﻿using InventoryMgmt.Models;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace InventoryMgmt.Forms
 {
     public partial class ModifyProductForm : Form
     {
-        //private Part SelectedPart;
-        private Product currentProduct;
+        private Product selectedProduct;
         private BindingList<Part> associatedParts = new BindingList<Part>();
 
         public ModifyProductForm(Product product)
         {
             InitializeComponent();
-            currentProduct = product;
-        }
+            selectedProduct = product;
 
-        private void ModifyProductForm_Load(object sender, EventArgs e)
-        {
+            txtID.Text = selectedProduct.ProductID.ToString();
+            txtName.Text = selectedProduct.Name;
+            txtInventory.Text = selectedProduct.InStock.ToString();
+            txtPrice.Text = selectedProduct.Price.ToString();
+            txtMin.Text = selectedProduct.Min.ToString();
+            txtMax.Text = selectedProduct.Max.ToString();
+
+            foreach (var part in product.AssociatedParts)
+            {
+                associatedParts.Add(part);
+            }
+
             dgvAllParts.DataSource = Inventory.AllParts;
-
-            associatedParts = new BindingList<Part>(currentProduct.AssociatedParts.ToList());
             dgvAssociatedParts.DataSource = associatedParts;
-
-            txtID.Text = currentProduct.ProductID.ToString();
-            txtName.Text = currentProduct.Name;
-            txtInventory.Text = currentProduct.InStock.ToString();
-            txtPrice.Text = currentProduct.Price.ToString();
-            txtMin.Text = currentProduct.Min.ToString();
-            txtMax.Text = currentProduct.Max.ToString();
         }
+
 
         //ADDS PART
-
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (dgvAllParts.CurrentRow == null)
+            if (dgvAllParts.CurrentRow != null) 
             {
-                MessageBox.Show("Please select a part to add. ");
-                return;
+                Part selectedPart = (Part)dgvAllParts.CurrentRow.DataBoundItem;
+                associatedParts.Add(selectedPart);
             }
-
-            Part selectedPart = (Part)dgvAllParts.CurrentRow.DataBoundItem;
-
-            if (associatedParts.Any(p => p.PartID == selectedPart.PartID))
-            {
-                MessageBox.Show("This part is already associated with this product.");
-                return;
-            }
-
-            associatedParts.Add(selectedPart);
         }
 
-        //Remove Part
-
+        //Removes Part
         private void btnDeleteAssociated_Click(object sender, EventArgs e)
         {
-            if (dgvAssociatedParts.CurrentRow == null)
+            if (dgvAssociatedParts.CurrentRow != null)
             {
-                MessageBox.Show("Please select a part to remove.");
-                return;
-            }
-
-            Part selectedPart = (Part)dgvAssociatedParts.CurrentRow.DataBoundItem;
-
-            DialogResult result = MessageBox.Show(
-                $"Are you sure you want to remove {selectedPart.Name}?",
-                "Confirm Delete",
-                MessageBoxButtons.YesNo);
-
-            if (result == DialogResult.Yes)
-            {
-                associatedParts.Remove(selectedPart);
+                Part selectedPart = (Part)dgvAllParts.CurrentRow.DataBoundItem;
+                associatedParts.Add(selectedPart);
             }
         }
 
         //Saves Product
-
         private void btnSave_Click(object sender, EventArgs e)
         {
-            try 
+            try
             {
+                int id = int.Parse(txtID.Text);
                 string name = label3.Text.Trim();
                 int stock = int.Parse(label4.Text);
                 decimal price = decimal.Parse(label5.Text);
@@ -106,27 +79,21 @@ namespace InventoryMgmt.Forms
                     return;
                 }
 
-                currentProduct.Name = name;
-                currentProduct.InStock = stock;
-                currentProduct.Price = price;
-                currentProduct.Min = min;
-                currentProduct.Max = max;
-
-                currentProduct.AssociatedParts.Clear();
+                Product updatedProduct = new Product(id, name, price, stock, min, max);
                 foreach (var part in associatedParts)
-                    currentProduct.AddAssociatedPart(part);
+                {
+                    updatedProduct.AddAssociatedPart(part);
 
-                MessageBox.Show("Product updated successfully!");
+                    Inventory.UpdateProduct(id, updatedProduct);
+                    MessageBox.Show("Product updated succcesfully!");
+                    this.Close();
+                }
+            }
+
+            catch 
+            {
+                MessageBox.Show("Please ensure all fields are filed out correctly.");
                 this.Close();
-            }
-
-            catch(FormatException)
-            {
-                MessageBox.Show("Please enter valid values for all fields.");
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show($"Error updating product: {ex.Message}");
             }
         }
 

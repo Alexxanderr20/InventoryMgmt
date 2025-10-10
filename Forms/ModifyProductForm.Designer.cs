@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnSearchProducts = new System.Windows.Forms.Button();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -63,15 +63,15 @@
             this.label1.Text = "Modify Product";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // button1
+            // btnSearchProducts
             // 
-            this.button1.Location = new System.Drawing.Point(408, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Search";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.btnSearch_Click);
+            this.btnSearchProducts.Location = new System.Drawing.Point(408, 12);
+            this.btnSearchProducts.Name = "btnSearchProducts";
+            this.btnSearchProducts.Size = new System.Drawing.Size(75, 23);
+            this.btnSearchProducts.TabIndex = 1;
+            this.btnSearchProducts.Text = "Search";
+            this.btnSearchProducts.UseVisualStyleBackColor = true;
+            this.btnSearchProducts.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // txtSearch
             // 
@@ -266,7 +266,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtSearch);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnSearchProducts);
             this.Controls.Add(this.label1);
             this.Name = "ModifyProductForm";
             this.Text = "ModifyProductForm";
@@ -280,7 +280,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnSearchProducts;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
