@@ -76,9 +76,9 @@ namespace InventoryMgmt.Models {
             return AllParts.Remove(part);
         }
 
-        public static Part LookupPart(int partID)
+        public static List<Part> LookupPart(string query)
         {
-            return AllParts.FirstOrDefault(p => p.PartID == partID);
+            return AllParts.Where(p => p.Name.ToLower().Contains(query.ToLower()) || p.PartID.ToString() == query).ToList();
         }
         public static List<Part> GetAllParts()
         {
