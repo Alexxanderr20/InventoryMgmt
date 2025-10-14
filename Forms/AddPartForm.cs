@@ -90,42 +90,6 @@ namespace InventoryMgmt.Forms
             Inventory.AddPart(newPart);
 
             this.Close();
-
-
-
-
-
-            /*
-            try
-            {
-                int partID = int.Parse(txtPartID.Text);
-                string name = txtPartName.Text;
-                decimal price = decimal.Parse(txtPrice.Text);
-                int stock = int.Parse(txtInStock.Text);
-                int min = int.Parse(txtMin.Text);
-                int max = int.Parse(txtMax.Text);
-
-                Part newPart;
-
-                if (rbtnInhouse.Checked)
-                {
-                    int machineID = int.Parse(txtMachineID.Text);
-                    newPart = new Inhouse(partID, name, price, stock, min, max, machineID);
-                }
-                else
-                {
-                    string companyName = txtMachineID.Text;
-                    newPart = new Outsourced(partID, name, price, stock, min, max, companyName);
-                }
-
-                Inventory.AddPart(newPart);
-                this.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
-            */
         }
 
         //Toggles between In-House is selected

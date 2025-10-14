@@ -1,9 +1,7 @@
 ﻿using InventoryMgmt.Forms;
 using InventoryMgmt.Models;
 using System;
-using System.ComponentModel;
 using System.Windows.Forms;
-using System.Linq;
 
 namespace InventoryMgmt
 {
@@ -142,24 +140,24 @@ namespace InventoryMgmt
 
         private void btnSearchParts_Click(Object sender, EventArgs e)
         {
-            string query = txtSearchParts.Text.Trim().ToLower();
-            bool found = false;
+            string query = txtPartsSearch.Text.Trim();
 
-            dgvParts.ClearSelection();
-
-            foreach (DataGridViewRow row in dgvParts.Rows)
+            if (string.IsNullOrEmpty(query))
             {
-                if (row.Cells["PartID"].Value.ToString().ToLower().Contains(query) ||
-                    row.Cells["Name"].Value.ToString().ToLower().Contains(query)) 
-                {
-                    row.Selected = true;
-                    found = true;
-                }
+                dgvParts.DataSource = Inventory.AllParts;
+                return;
             }
 
-            if (!found)
+            var results = Inventory.LookupPart(query);
+
+            if (results.Count > 0)
+            {
+                dgvParts.DataSource = results;
+            }
+            else
             {
                 MessageBox.Show("No matching parts found.");
+                dgvParts.DataSource = Inventory.AllParts;
             }
         }
 

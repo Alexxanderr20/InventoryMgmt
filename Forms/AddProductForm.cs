@@ -67,50 +67,63 @@ namespace InventoryMgmt.Forms
         //Saves Product
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(txtProductName.Text))
+            {
+                MessageBox.Show("Name cannot be empty.");
+                return;
+            }
+
+            decimal price;
+            int inStock, min, max;
+
             try
             {
-                int id = Inventory.GetNextProductID();
-                string name = txtProductName.Text;
-                int stock = int.Parse(txtProductInStock.Text.Trim());
-                decimal price = decimal.Parse(txtProductPrice.Text.Trim());
-                int min = int.Parse(txtProductMin.Text.Trim());
-                int max = int.Parse(txtProductMax.Text.Trim());
-
-                //MessageBox.Show($"Inventory: {stock}, Min: {min}, Max: {max}, Price: {price}");
-
-                if (min > max)
-                {
-                    MessageBox.Show("Min can not be greater than Max.");
-                    return;
-                }
-
-                if (stock < min || stock > max)
-                {
-                    MessageBox.Show("Inventory must be between Min and Max.");
-                    return;
-                }
-
-                Product newProduct = new Product(id, name, price, stock, min, max);
-
-                foreach (Part part in associatedParts)
-                {
-                    newProduct.AddAssociatedPart(part);
-                }
-
-                Inventory.AddProduct(newProduct);
-
-                MessageBox.Show("Product added sucessfully! ");
-                Close();
+                price = decimal.Parse(txtProductPrice.Text);
+                inStock = int.Parse(txtProductInStock.Text);
+                min = int.Parse(txtProductMin.Text);
+                max = int.Parse(txtProductMax.Text);
             }
-
-            catch (FormatException)
+            catch
             {
-                MessageBox.Show("Please enter valid values for all fields.");
+                MessageBox.Show("Please enter valid values for Price, In Stock, Min, and Max.");
+                return;
             }
-            catch (Exception ex)
+
+            if (min > max)
             {
-                MessageBox.Show($"Error saving product: {ex.Message}");
+                MessageBox.Show("Min cannot be greater than Max.");
+                return;
             }
+            if (inStock < min || inStock > max)
+            {
+                MessageBox.Show("Inventory must be between Min and Max.");
+                return;
+            }
+            if (!associatedParts.Any())
+            {
+                MessageBox.Show("A product must have at least one associated part.");
+                return;
+            }
+
+            decimal totalPartsCost = associatedParts.Sum(p => p.Price);
+
+            if (price <= 0)
+            {
+                MessageBox.Show($"Product price cannot be less than the total cost of " +
+                    $"associated parts (${totalPartsCost}).");
+                return;
+            }
+
+            int productID = int.Parse(txtProductID.Text);
+            Product newProduct = new Product(productID, txtProductName.Text, price, inStock, min, max);
+
+            foreach (Part part in associatedParts)
+            {
+                newProduct.AddAssociatedPart(part);
+            }
+            Inventory.AddProduct(newProduct);
+
+            this.Close();
         }
 
 

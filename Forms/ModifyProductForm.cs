@@ -48,10 +48,20 @@ namespace InventoryMgmt.Forms
         //Removes Part
         private void btnDeleteAssociated_Click(object sender, EventArgs e)
         {
-            if (dgvAssociatedParts.CurrentRow != null)
+            if (dgvAssociatedParts.CurrentRow == null)
             {
-                Part selectedPart = (Part)dgvAllParts.CurrentRow.DataBoundItem;
-                associatedParts.Add(selectedPart);
+               MessageBox.Show("Please select a part to remove.");
+               return;
+            }
+
+            Part selectedPart = (Part)dgvAssociatedParts.CurrentRow.DataBoundItem;
+
+            DialogResult confirm = MessageBox.Show($"Are you sure you want to remove part " +
+                $"'{selectedPart.Name}'?", "Confirm Remove", MessageBoxButtons.YesNo);
+
+            if (confirm == DialogResult.Yes)
+            {
+                associatedParts.Remove(selectedPart);
             }
         }
 
