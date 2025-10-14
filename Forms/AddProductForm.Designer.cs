@@ -123,8 +123,10 @@
             // 
             // txtProductID
             // 
+            this.txtProductID.Enabled = false;
             this.txtProductID.Location = new System.Drawing.Point(108, 136);
             this.txtProductID.Name = "txtProductID";
+            this.txtProductID.ReadOnly = true;
             this.txtProductID.Size = new System.Drawing.Size(100, 20);
             this.txtProductID.TabIndex = 7;
             // 

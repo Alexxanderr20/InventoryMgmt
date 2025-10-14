@@ -50,22 +50,35 @@ namespace InventoryMgmt
 
         private void btnDeletePart_Click(Object sender, EventArgs e)
         {
-            if (dgvParts.CurrentRow != null)
-            {
-                Part selectedPart = (Part)dgvParts.CurrentRow.DataBoundItem;
+            var selectedPart = (Part)dgvParts.CurrentRow?.DataBoundItem;
 
-                var confirm = MessageBox.Show($"Are you sure want to delete part '{selectedPart.Name}'?", "Confirm Delete", MessageBoxButtons.YesNo);
-                if (confirm == DialogResult.Yes)
-                {
-                    Models.Inventory.DeletePart(selectedPart);
-                    dgvParts.DataSource = null;
-                    dgvParts.DataSource = Inventory.AllParts;
-                }
-            }
-            else
+            if(selectedPart == null)
             {
                 MessageBox.Show("Please select a part to delete.");
+                return;
             }
+
+            foreach (var product in Inventory.Products)
+            {
+                if(product.AssociatedParts.Contains(selectedPart))
+                {
+                    MessageBox.Show("This part is associated with a product and cannot be deleted.",
+                        "Delete Not Allowed",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            var confirm = MessageBox.Show($"Are you sure want to delete part '{selectedPart.Name}'?", 
+                "Confirm Delete", 
+                MessageBoxButtons.YesNo);
+
+            if (confirm == DialogResult.Yes)
+            {
+                Inventory.DeletePart(selectedPart);
+            }
+
         }
 
         private void btnAddProduct_Click(Object sender, EventArgs e)

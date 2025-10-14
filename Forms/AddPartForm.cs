@@ -10,6 +10,8 @@ namespace InventoryMgmt.Forms
         {
             InitializeComponent(); 
 
+            txtPartID.Text = Inventory.GeneratePartID().ToString();
+            txtPartID.ReadOnly = true;
             rbtnInhouse.Checked = true;
         }
 
@@ -22,6 +24,78 @@ namespace InventoryMgmt.Forms
         //Saves the new part
         private void btnSave_Click(Object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(txtPartName.Text))
+            {
+                MessageBox.Show("Name cannot be empty.");
+                return;
+            }
+
+            decimal price;
+            int inStock, min, max;
+
+            try
+            {
+                price = decimal.Parse(txtPrice.Text);
+                inStock = int.Parse(txtInStock.Text);
+                min = int.Parse(txtMin.Text);
+                max = int.Parse(txtMax.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Please enter valid values for Price, In Stock, Min, and Max.");
+                return;
+            }
+
+            if (min > max)
+            {
+                MessageBox.Show("Min cannot be greater than Max.");
+                return;
+            }
+
+            if (inStock < min || inStock > max)
+            {
+                MessageBox.Show("Inventory must be between Min and Max.");
+                return;
+            }
+
+            if (price < 0)
+            {
+                MessageBox.Show("Price cannot be negative.");
+                return;
+            }
+
+            int partID = int.Parse(txtPartID.Text);
+
+            Part newPart;
+
+            if (rbtnInhouse.Checked)
+            {
+                if (!int.TryParse(txtMachineID.Text, out int machineID))
+                {
+                    MessageBox.Show("Please enter a valid Machine ID.");
+                    return;
+                }
+                newPart = new Inhouse(partID, txtPartName.Text, price, inStock, min, max, machineID);
+            }
+            else
+            {
+                if (string.IsNullOrWhiteSpace(txtMachineID.Text))
+                {
+                    MessageBox.Show("Company Name cannot be empty.");
+                    return;
+                }
+                newPart = new Outsourced(partID, txtPartName.Text, price, inStock, min, max, txtMachineID.Text);
+            }
+
+            Inventory.AddPart(newPart);
+
+            this.Close();
+
+
+
+
+
+            /*
             try
             {
                 int partID = int.Parse(txtPartID.Text);
@@ -51,6 +125,7 @@ namespace InventoryMgmt.Forms
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
+            */
         }
 
         //Toggles between In-House is selected

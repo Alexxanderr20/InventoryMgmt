@@ -102,7 +102,7 @@ namespace InventoryMgmt.Forms
 
         private void ModifyPartForm_Load(object sender, EventArgs e)
         {
-
+            txtPartID.Enabled = false;
         }
 
         private void label1_Click(object sender, EventArgs e)

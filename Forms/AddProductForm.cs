@@ -14,6 +14,9 @@ namespace InventoryMgmt.Forms
         {
             InitializeComponent();
 
+            txtProductID.ReadOnly = true;
+            txtProductID.Text = Inventory.GetNextProductID().ToString();
+
             dgvAllParts.DataSource = Inventory.AllParts;
             dgvAssociatedParts.DataSource = associatedParts;
         }

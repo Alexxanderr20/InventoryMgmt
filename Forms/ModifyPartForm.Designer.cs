@@ -77,8 +77,10 @@ namespace InventoryMgmt.Forms
             // 
             // txtPartID
             // 
+            this.txtPartID.Enabled = false;
             this.txtPartID.Location = new System.Drawing.Point(254, 54);
             this.txtPartID.Name = "txtPartID";
+            this.txtPartID.ReadOnly = true;
             this.txtPartID.Size = new System.Drawing.Size(282, 20);
             this.txtPartID.TabIndex = 2;
             this.txtPartID.TextChanged += new System.EventHandler(this.txtPartID_TextChanged);
@@ -201,7 +203,7 @@ namespace InventoryMgmt.Forms
             this.lblMachineCompany.TabIndex = 16;
             this.lblMachineCompany.Text = "Machine ID";
             // 
-            // Save Button
+            // btnSave
             // 
             this.btnSave.Location = new System.Drawing.Point(456, 390);
             this.btnSave.Name = "btnSave";
@@ -211,7 +213,7 @@ namespace InventoryMgmt.Forms
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // Cancel button
+            // btnCancel
             // 
             this.btnCancel.Location = new System.Drawing.Point(567, 389);
             this.btnCancel.Name = "btnCancel";
@@ -221,7 +223,7 @@ namespace InventoryMgmt.Forms
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // AddPartForm
+            // ModifyPartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -250,6 +252,7 @@ namespace InventoryMgmt.Forms
             this.Load += new System.EventHandler(this.ModifyPartForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion

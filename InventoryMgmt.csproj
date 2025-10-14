@@ -93,6 +93,9 @@
     <EmbeddedResource Include="Forms\AddProductForm.resx">
       <DependentUpon>AddProductForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ModifyPartForm.resx">
+      <DependentUpon>ModifyPartForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ModifyProductForm.resx">
       <DependentUpon>ModifyProductForm.cs</DependentUpon>
     </EmbeddedResource>

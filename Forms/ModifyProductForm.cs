@@ -60,12 +60,25 @@ namespace InventoryMgmt.Forms
         {
             try
             {
-                int id = int.Parse(txtID.Text);
-                string name = label3.Text.Trim();
-                int stock = int.Parse(label4.Text);
-                decimal price = decimal.Parse(label5.Text);
-                int min = int.Parse(label6.Text);
-                int max = int.Parse(label7.Text);
+                if (string.IsNullOrWhiteSpace(txtName.Text) ||
+                    string.IsNullOrWhiteSpace(txtInventory.Text) ||
+                    string.IsNullOrWhiteSpace(txtPrice.Text) ||
+                    string.IsNullOrWhiteSpace(txtMin.Text) ||
+                    string.IsNullOrWhiteSpace(txtMax.Text))
+                {
+                    MessageBox.Show("Please ensure all fields are filled out correctly.");
+                    return;
+                }
+
+                if (!int.TryParse(txtID.Text, out int id) ||
+                    !int.TryParse(txtInventory.Text, out int stock) ||
+                    !decimal.TryParse(txtPrice.Text, out decimal price) ||
+                    !int.TryParse(txtMin.Text, out int min) ||
+                    !int.TryParse(txtMax.Text, out int max))
+                {
+                    MessageBox.Show("Please ensure Inventory, Min, Max, and Price contain valid numbers.");
+                    return;
+                }
 
                 if (min > max)
                 {
@@ -79,23 +92,24 @@ namespace InventoryMgmt.Forms
                     return;
                 }
 
-                Product updatedProduct = new Product(id, name, price, stock, min, max);
-                foreach (var part in associatedParts)
+                Product updatedProduct = new Product(
+                    id, txtName.Text.Trim(), price, stock, min, max);
+
+                foreach (Part part in associatedParts)
                 {
                     updatedProduct.AddAssociatedPart(part);
-
-                    Inventory.UpdateProduct(id, updatedProduct);
-                    MessageBox.Show("Product updated succcesfully!");
-                    this.Close();
                 }
+
+                Inventory.UpdateProduct(updatedProduct.ProductID, updatedProduct);
+                this.Close();
+
             }
 
-            catch 
+            catch (Exception ex) 
             {
-                MessageBox.Show("Please ensure all fields are filed out correctly.");
-                this.Close();
+                MessageBox.Show("An unexpected error occured:  " + ex.Message);
             }
-        }
+         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
